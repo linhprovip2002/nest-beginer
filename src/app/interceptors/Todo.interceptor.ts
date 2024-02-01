@@ -1,16 +1,16 @@
 import * as Joi from 'joi';
 
 export const TodoSchema = Joi.object({
-  id: Joi.number().required(),
-  status: Joi.string().valid('TODO', 'DOING', 'DONE').required(),
+  id: Joi.number(),
+  status: Joi.string().valid('TODO', 'DOING', 'DONE'),
   color: Joi.string().optional(),
   backgroundColor: Joi.string().optional(),
   title: Joi.string().required(),
   description: Joi.string().required(),
-  createdAt: Joi.date().required(),
-  updatedAt: Joi.date().required(),
+  createdAt: Joi.date(),
+  updatedAt: Joi.date(),
 });
 
 export const IdSchema = Joi.object({
-  id: Joi.number().required(),
-});
+  id: Joi.object(),
+}).unknown(true);

@@ -6,12 +6,12 @@ export const shouldCache = (): boolean => {
   return !['test', 'development'].includes(process.env.NODE_ENV ?? '');
 };
 
-export default async function postgresConnection(): Promise<Connection> {
+export async function postgresConnection(): Promise<Connection> {
   const config = {
     database: 'sgroup',
     // entities: Object.values(entities),
-    host: '127.0.0.1',
-    password: '123456',
+    host: process.env.POSTGRES_HOST ?? 'localhost',
+    password: process.env.POSTGRES_PASSWORD,
     port: 5432,
     type: 'postgres' as DatabaseType,
     username: 'postgres',
