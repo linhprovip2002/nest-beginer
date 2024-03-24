@@ -1,16 +1,22 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-
+import { Task } from './task.model';
 @Injectable()
 export class TasksService {
+  private tasks: Task[] = [];
   create(createTaskDto: CreateTaskDto) {
     Logger.debug('createTaskDto: ', createTaskDto);
-    return 'This action adds a new task';
+    const task: Task = {
+      id: Math.random().toString(),
+      ...createTaskDto,
+    };
+    this.tasks.push(task);
+    return task.id;
   }
 
-  findAll() {
-    return `This action returns all tasks`;
+  findAll(): Task[] {
+    return this.tasks;
   }
 
   findOne(id: number) {
